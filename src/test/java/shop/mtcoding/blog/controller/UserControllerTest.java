@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.client.RestTemplate;
 import shop.mtcoding.blog._core.utils.ApiUtil;
+import shop.mtcoding.blog.user.SessionUser;
 import shop.mtcoding.blog.user.UserRequest;
 import shop.mtcoding.blog.user.UserResponse;
 
@@ -57,6 +58,8 @@ public class UserControllerTest {
         //int statusCode = actions.andReturn().getResponse().getStatus();
         System.out.println("respBody : "+respBody);
         //System.out.println("statusCode : "+statusCode);
+
+        SessionUser sessionUser = (SessionUser)actions.andReturn().getModelAndView().getModel().get("sessionUser");  // SSR 테스트 할때 사용
 
         // then
         actions.andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200));
